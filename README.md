@@ -5,7 +5,7 @@ This website is built using:
 
 ### [`ReactJS`](https://reactjs.org)
 
-React powers all of the graphical components and is built entirely using hooks and no class components.
+React powers all of the graphical components and is built entirely using hooks with no class components. Material UI is the main driving force behind all graphics, including using its styles library to handle the JSS.
 
 Packages used include (but are not limited to):
  - [`Redux`](https://redux.js.org) for global state management
