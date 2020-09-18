@@ -15,6 +15,7 @@ Packages used include (but are not limited to):
 
 ## [`Firebase`](https://firebase.google.com)
 
+Services used:
     - [`Firebase Hosting`](https://firebase.google.com/docs/hosting) hosts of the website
     - [`Firestore`](https://firebase.google.com/docs/firestore) handles the data storage
 
