@@ -8,7 +8,6 @@ import AppWrapper from '../core/components/appWrapper';
 import CodingProjects from '../apps/codingProjects/main';
 import ProjectWrapper from '../core/components/projectWrapper';
 import RecipeBrowser from '../projects/recipeBrowser/main';
-import Resume from '../apps/resume/main';
 
 
 //////////////////////////////////////////////////////////
@@ -25,7 +24,7 @@ export const HOME = '/';
 export const LOGIN = '/login';
 export const ABOUT_ME = '/';
 export const PROJECTS = '/projects';
-export const RESUME = '/resume';
+//export const RESUME = '/resume';
 export const RECIPES = '/projects/recipe_browser'
 
 //////////////////////////////////////////////////////////
@@ -62,16 +61,6 @@ export const ROUTES = [
     componentFunc: (props) => (
       <AppWrapper>
         <CodingProjects {...props}/>
-      </AppWrapper>
-    ),
-    props: {},
-  },
-  {
-    label: "Resume",
-    path: RESUME,
-    componentFunc: (props) => (
-      <AppWrapper>
-        <Resume {...props}/>
       </AppWrapper>
     ),
     props: {},
