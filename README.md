@@ -8,16 +8,16 @@ This website is built using:
 React powers all of the graphical components and is built entirely using hooks and no class components.
 
 Packages used include (but are not limited to):
-    - [Redux](https://redux.js.org)
-    - [`Redux-Saga`](https://redux-saga.js.org) for handling async actions
-    - [`Material-UI`](https://material-ui.com) as a component and JSS styling library
-    - [`React Router`](https://reactrouter.com) as a navigational router to make an SPA feel like a traditional website
+ - [Redux](https://redux.js.org)
+ - [`Redux-Saga`](https://redux-saga.js.org) for handling async actions
+ - [`Material-UI`](https://material-ui.com) as a component and JSS styling library
+ - [`React Router`](https://reactrouter.com) as a navigational router to make an SPA feel like a traditional website
 
 ## [`Firebase`](https://firebase.google.com)
 
 Services used:
-    - [`Firebase Hosting`](https://firebase.google.com/docs/hosting) hosts of the website
-    - [`Firestore`](https://firebase.google.com/docs/firestore) handles the data storage
+ - [`Firebase Hosting`](https://firebase.google.com/docs/hosting) hosts of the website
+ - [`Firestore`](https://firebase.google.com/docs/firestore) handles the data storage
 
 ## Additional Projects
 
