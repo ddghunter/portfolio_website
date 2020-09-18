@@ -1,26 +1,60 @@
+// React import
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// PropTypes import
+import PropTypes from 'proptypes';
+// React Redux import
+import { connect } from 'react-redux';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+// My Component imports
+import MainGrid from './core/containers/mainGrid';
+
+// My Ducks imports
+import { get_portfolio } from './core/ducks/bio';
+
+
+
+const App = ({ fetchPortfolio }) => {
+  const [height, setHeight] = React.useState(0);
+  const [width, setWidth] = React.useState(0);
+
+  React.useEffect(() => {
+    // Fetch Portfolio Data
+    fetchPortfolio();
+    // Set Window Resize Listener
+    const handleResize = () => {
+      setHeight(window.innerHeight);
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    // Set Initial Window Size
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, [fetchPortfolio]);
+
+
+  return(
+    <MainGrid
+      dimensions = {{height, width}}
+    />
   );
-}
+};
 
-export default App;
+App.propTypes = {
+  fetchPortfolio: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchPortfolio: () => { dispatch(get_portfolio()) },
+  };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

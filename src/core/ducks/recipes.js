@@ -1,0 +1,81 @@
+//////////////////////////////////////////////////////////
+// State
+//////////////////////////////////////////////////////////
+
+const defaultState = {
+  recipes: {},
+  landingPage: [],
+  categories: [],
+  areas: [],
+  ingredients: [],
+};
+
+
+//////////////////////////////////////////////////////////
+// Saga Actions
+//////////////////////////////////////////////////////////
+
+export const LIST_FILTERS = 'recipes/sagas/LIST_FILTERS';
+
+export const RANDOM_RECIPES = 'recipes/sagas/RANDOM_RECIPES';
+
+//////////////////////////////////////////////////////////
+// Saga Action Creators
+//////////////////////////////////////////////////////////
+
+export const list_filters = () => {
+  return {
+    type: LIST_FILTERS,
+  };
+};
+
+export const generate_random_recipes = (number) => {
+  return {
+    type: RANDOM_RECIPES,
+    payload: {number}
+  };
+};
+
+//////////////////////////////////////////////////////////
+// Reducer Actions
+//////////////////////////////////////////////////////////
+
+const UPDATE = 'projects/reducers/UPDATE';
+const CLEAR = 'projects/reducers/CLEAR';
+
+//////////////////////////////////////////////////////////
+// Reducer Action Creators
+//////////////////////////////////////////////////////////
+
+export const update = (payload) => {
+  return {
+    type: UPDATE,
+    payload,
+  };
+};
+
+export const clear = () => {
+  return {
+    type: CLEAR,
+  };
+};
+
+//////////////////////////////////////////////////////////
+// Reducer
+//////////////////////////////////////////////////////////
+
+const reducer = (state = defaultState, action) => {
+  switch(action.type){
+    case UPDATE:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case CLEAR:
+      return {...defaultState};
+    default:
+      return state;
+  }
+};
+
+export default reducer;
