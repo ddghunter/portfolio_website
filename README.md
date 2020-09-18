@@ -8,7 +8,7 @@ This website is built using:
 React powers all of the graphical components and is built entirely using hooks and no class components.
 
 Packages used include (but are not limited to):
- - [Redux](https://redux.js.org)
+ - [`Redux`](https://redux.js.org) for global state management
  - [`Redux-Saga`](https://redux-saga.js.org) for handling async actions
  - [`Material-UI`](https://material-ui.com) as a component and JSS styling library
  - [`React Router`](https://reactrouter.com) as a navigational router to make an SPA feel like a traditional website
