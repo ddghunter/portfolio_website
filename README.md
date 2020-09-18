@@ -25,6 +25,6 @@ Since this website is a showcase of my talents, I decided to create some small p
 
 ## `Recipe Browser`
 
-    Integrates with [TheMealDB](https://www.themealdb.com/api.php)'s API, and allows you to browse all the available recipes they have. It also includes the ability to search for and filter the recipes.
+Integrates with [TheMealDB](https://www.themealdb.com/api.php)'s API, and allows you to browse all the available recipes they have. It also includes the ability to search for and filter the recipes.
 
 
