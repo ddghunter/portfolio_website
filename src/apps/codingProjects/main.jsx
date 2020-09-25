@@ -8,13 +8,52 @@ import { connect } from 'react-redux';
 // My Component imports
 import CodingProject from './containers/codingProject';
 
+// My Image import
+import backgroundImage from '../../core/images/background.jpg';
+
 // Material UI Styles
-//import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/styles';
 // Material UI Component imports
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+
+
+const useStyles = makeStyles(theme => ({
+  background: {
+    height: "100%",
+    overflow: "auto",
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+  },
+}));
 
 
 const CodingProjects = ({ dimensions, projects = [] }) => {
+  const classes = useStyles();
+
+  const generateStyles = React.useCallback(() => {
+    var result = {};
+    if(dimensions.width < 900){
+      if(dimensions.width < 500){
+        result["width"] = "70%";
+        result["paddingLeft"] = "15%";
+        result["paddingRight"] = "15%";
+      }
+      else{
+        result["width"] = "60%";
+        result["paddingLeft"] = "20%";
+        result["paddingRight"] = "20%";
+      }
+    }
+    else{
+      result["width"] = "50%";
+      result["paddingLeft"] = "25%";
+      result["paddingRight"] = "25%";
+    }
+    return result;
+  }, [dimensions]);
 
   const renderProjects = React.useCallback(() => {
     let props;
@@ -36,14 +75,19 @@ const CodingProjects = ({ dimensions, projects = [] }) => {
   }, [dimensions, projects]);
   
   return(
-    <Grid
-      container
-      direction = "column"
-      justify = "flex-start"
-      alignItems = "stretch"
+    <Paper
+      className = {classes.background}
+      style = {generateStyles()}
     >
-      { renderProjects() }
-    </Grid>
+      <Grid
+        container
+        direction = "column"
+        justify = "flex-start"
+        alignItems = "stretch"
+      >
+        { renderProjects() }
+      </Grid>
+    </Paper>
   );
 };
 
