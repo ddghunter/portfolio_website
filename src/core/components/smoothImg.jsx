@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const SmoothImage = ({ src, alt }) => {
+const SmoothImage = ({ dimensions, src, alt }) => {
   const classes = useStyles();
   const [imageLoaded, setImageLoaded] = React.useState(false);
   const [validSrc, setValidSrc] = React.useState(!!src);
@@ -45,6 +45,7 @@ const SmoothImage = ({ src, alt }) => {
           src = {src}
           alt = {alt}
           className = {className}
+          style = {dimensions}
           onLoad = {() => setImageLoaded(true)}
           onError = {() => setValidSrc(false)}
         />
@@ -53,7 +54,7 @@ const SmoothImage = ({ src, alt }) => {
     else{
       return null;
     }
-  }, [src, alt, imageLoaded, validSrc, classes]);
+  }, [dimensions, src, alt, imageLoaded, validSrc, classes]);
     
   return(
     <div className={classes.smoothImageWrapper}>
@@ -64,6 +65,7 @@ const SmoothImage = ({ src, alt }) => {
 };
 
 SmoothImage.propTypes = {
+  dimensions: PropTypes.objectOf(PropTypes.number).isRequired,
   src: PropTypes.string.isRequired,
   alt: PropTypes
 };
