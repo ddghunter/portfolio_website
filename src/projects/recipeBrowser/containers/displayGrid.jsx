@@ -3,6 +3,9 @@ import React from 'react';
 // PropTypes import
 import PropTypes from 'proptypes';
 
+// My Component imports
+import RecipeDisplay from '../components/gridDisplay';
+
 // Material UI Styles
 import { makeStyles } from '@material-ui/styles';
 // Material UI Component imports
@@ -25,65 +28,49 @@ const RecipeDisplayGrid = ({
   recipes = [],
 }) => {
   const classes = useStyles();
-
-  const renderRecipes = React.useCallback(() => {
-    
-    const GridItem = React.forwardRef(({ children, ...props }, ref) => {
-      return(
-        <Grid
-          item
-          ref = {ref}
-          className={classes.recipeItem}
-          {...props}
-        >
-          { children }
-        </Grid>
-      );
-    });
-    
-    let result = [], ref;
-    const numRecipes = recipes.length;
-    if(placeholders && numRecipes < placeholders){
-      for(var x=0; x<placeholders; x++){
-        ref = React.createRef();
-        if(x < numRecipes){
-          result.push(
-            <GridItem ref={ref}>
-
-            </GridItem>
-          );
-        }
-        else{
-          result.push(
-            <GridItem ref={ref}>
-
-            </GridItem>
-          );
-        }
+  var displayList = [];
+  const numRecipes = recipes.length;
+  if(numRecipes < placeholders){
+    for(var x=0; x<placeholders; x++){
+      if(x < numRecipes){
+        displayList.push(recipes[x]);
+      }
+      else{
+        displayList.push(null);
       }
     }
-    else{
-      result = recipes.map((recipe) => {
-        ref = React.createRef();
-        return(
-          <GridItem ref={ref}>
-
-          </GridItem>
-        );
-      });
-    }
-    return result;
-  }, [placeholders, recipes, classes.recipeItem]);
-  
-  console.log("Recipes:", recipes)
+  }
+  else{
+    displayList = [...recipes];
+  }
+    
+  console.log("Recipes:", recipes);
   return(
     <Grid
       container
       direction = "row"
-      justify = "flex-start"
+      justify = "space-evenly"
+      alignItems = "center"
       className = {classes.recipeDisplayGrid}
     >
-      { renderRecipes() }
+      { displayList.map((recipe, index) => {
+          let keyStr;
+          if(recipe !== null){
+            keyStr = "recipe-" + recipe.id;
+          }
+          else{
+            keyStr = "recipe-loading-" + index;
+          }
+          return(
+            <Grid item key={keyStr + "-grid-item"}>
+              <RecipeDisplay
+                dimensions = {dimensions}
+                recipe = {recipe}
+              /> 
+            </Grid>
+          );
+        }) 
+      }
     </Grid>
   );
 };
@@ -91,7 +78,7 @@ const RecipeDisplayGrid = ({
 RecipeDisplayGrid.propTypes = {
   dimensions: PropTypes.objectOf(PropTypes.number).isRequired,
   placeholders: PropTypes.number,
-  recipes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  recipes: PropTypes.arrayOf(PropTypes.object),
 };
 
 
