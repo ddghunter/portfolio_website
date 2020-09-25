@@ -47,6 +47,7 @@ const RecipeBrowser = ({
   const classes = useStyles();
   const [areaFilter, setAreaFilter] = React.useState("");
   const [categoryFilter, setCategoryFilter] = React.useState("");
+  const [display, setDisplay] = React.useState([]);
   const [letterFilter, setLetterFilter] = React.useState("");
   const [search, setSearch] = React.useState("");
 
@@ -61,6 +62,38 @@ const RecipeBrowser = ({
     }
   }, [clearState, getFilters, getRandomRecipes]);
 
+
+  const generateDisplayedRecipes = React.useCallback(() => {
+    var result = [];
+    if(areaFilter === "" 
+    && categoryFilter === ""
+    && letterFilter === ""
+    && search === ""){
+      result = [...landingPage];
+    }
+    else{
+      if(search){
+
+      }
+      else if(letterFilter){
+
+      }
+      if(categoryFilter){
+
+      }
+      if(areaFilter){
+
+      } 
+    }
+    return result;
+  }, [areaFilter, categoryFilter, letterFilter, search, landingPage]);
+
+
+  const areaFilterOnChange = React.useCallback((event) => {
+
+  }, []);
+
+
   const searchOnChange = React.useCallback((event) => {
     const firstChar = event.target.value.charAt(0).toLowerCase();
     if(letterFilter === "" || letterFilter !== firstChar){
@@ -70,17 +103,6 @@ const RecipeBrowser = ({
   }, [letterFilter]);
 
 
-  const generateDisplayProps = React.useCallback(() => {
-    const props = {};
-    if(!areaFilter && !categoryFilter && !letterFilter){
-      props.recipes = landingPage;
-      props.placeholders = NUM_RANDOM_RECIPES;
-    }
-    else{
-      props.recipes = [];
-    }
-    return props;
-  }, [areaFilter, categoryFilter, letterFilter, landingPage, recipes]);
 
   //console.log("Landing Page:", landingPage);
   //console.log("Filters:", filters);
@@ -98,7 +120,8 @@ const RecipeBrowser = ({
       <Grid item className={classes.recipeBrowserDisplayItem}>
         <DisplayGrid
           dimensions = {dimensions}
-          {...generateDisplayProps()}
+          placeholders = {NUM_RANDOM_RECIPES+1} //NOTE: Fix!!
+          recipes = {generateDisplayedRecipes()}
         />
       </Grid>
     </Grid>
