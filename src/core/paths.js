@@ -1,13 +1,19 @@
 // React import
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 // React Router imports
 import { Redirect } from 'react-router-dom';
+
 // My Component imports
 import AboutMe from '../apps/aboutMe/main';
-import AppWrapper from '../core/components/appWrapper';
 import CodingProjects from '../apps/codingProjects/main';
-import ProjectWrapper from '../core/components/projectWrapper';
-import RecipeBrowser from '../projects/recipeBrowser/main';
+
+// Material UI Component imports
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+// My Project imports
+// NOTE: Use lazy imports for code splitting purposes so
+//       that modules don't get loaded until necessary
+const RecipeBrowser = lazy(() => import('../projects/recipeBrowser/main'));
 
 
 //////////////////////////////////////////////////////////
@@ -50,7 +56,7 @@ export const ROUTES = [
     path: ABOUT_ME,
     exact: true,
     componentFunc: (props) => (
-      <Redirect to="/projects" {...props}/>
+      <Redirect to={RECIPES} {...props}/>
     ),
     props: {},
   },
@@ -59,18 +65,16 @@ export const ROUTES = [
     path: PROJECTS,
     exact: true,
     componentFunc: (props) => (
-      <AppWrapper>
-        <CodingProjects {...props}/>
-      </AppWrapper>
+      <CodingProjects {...props}/>
     ),
     props: {},
   },
   {
     path: RECIPES,
     componentFunc: (props) => (
-      <ProjectWrapper>
-        <RecipeBrowser {...props}/>
-      </ProjectWrapper>
+      <Suspense fallback={<CircularProgress/>}>
+          <RecipeBrowser {...props}/>
+        </Suspense>
     ),
     props: {},
   },
