@@ -17,6 +17,7 @@ import Paper from '@material-ui/core/Paper';
 const useStyles = makeStyles(theme => ({
   navBarBackground: {
     padding: 10,
+    marginBottom: 2,
   },
   navBarGrid: {
 
